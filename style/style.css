@@ -20,7 +20,7 @@
 
   html {
     scroll-behavior: smooth; 
-    font-size: 15px; 
+    font-size: 16px; 
   }
     
 
@@ -747,11 +747,41 @@
   footer span { color: var(--lilas); }
 
   
-  @media (max-width: 768px) {
+ @media (max-width: 768px) {
     nav { padding: 1rem 1.2rem; }
-    .nav-links { display: none; }
+    .nav-links { 
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: rgba(13,13,15,0.98);
+      padding: 1.5rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      gap: 0.4rem;
+      z-index: 99;
+    }
+    .nav-links.open { display: flex; }
+    .nav-toggle {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      width: 22px; height: 2px;
+      background: var(--lilas);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
     .home-inner { flex-direction: column; gap: 2.5rem; padding: 2rem 1.2rem; }
     .sobre-grid, .contato-grid { grid-template-columns: 1fr; }
     .section-wrap { padding: 3rem 1.2rem; }
-    .home-card { display: none; }
+    .home-card { width: 100%; }
+    .avatar-frame { width: 100%; max-width: 300px; height: 380px; }
+    .imagem { width: 100%; height: 100%; object-fit: cover; }
+  }
+
+  @media (min-width: 769px) {
+    .nav-toggle { display: none; }
   }
