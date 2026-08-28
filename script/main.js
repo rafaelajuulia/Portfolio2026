@@ -1,4 +1,5 @@
-const pages   = document.querySelectorAll('.page');
+// ===================== NAVEGAÇÃO ENTRE PÁGINAS (SPA) =====================
+const pages = document.querySelectorAll('.page');
 const navLinks = document.querySelectorAll('[data-page]');
 
 function goTo(pageId) {
@@ -13,6 +14,9 @@ function goTo(pageId) {
   });
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const nav = document.getElementById('navLinks');
+  if (nav) nav.classList.remove('active');
 }
 
 navLinks.forEach(link => {
@@ -22,6 +26,16 @@ navLinks.forEach(link => {
   });
 });
 
+// ===================== MENU MOBILE =====================
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navLinks');
+if (navToggle && navMenu) {
+  navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+  });
+}
+
+// ===================== CONTATO (e-mail/telefone ofuscados) =====================
 (function renderContato() {
   const u = 'rafaelatech321';
   const d = 'gmail.com';
@@ -55,6 +69,7 @@ navLinks.forEach(link => {
   if (phoneVal)  phoneVal.textContent = phone;
 })();
 
+// ===================== FORMULÁRIO DE CONTATO =====================
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgzprqp';
 
 async function enviarMensagem() {
@@ -62,8 +77,7 @@ async function enviarMensagem() {
   const emailEl = document.getElementById('email');
   const msgEl   = document.getElementById('msg');
   const honey   = document.querySelector('input[name="_honey"]');
-  const btn     = document.querySelector('#contato .btn-primary');
-  const fb      = document.getElementById('form-feedback');
+  const btn     = document.querySelector('#contato .btn');
 
   const nome  = nomeEl.value.trim();
   const email = emailEl.value.trim();
@@ -116,11 +130,12 @@ function mostrarFeedback(texto, tipo) {
   const fb = document.getElementById('form-feedback');
   fb.textContent = texto;
   fb.style.display = 'block';
-  fb.style.color = tipo === 'erro' ? '#f87171' : 'var(--lilas)';
+  fb.style.color = tipo === 'erro' ? '#f87171' : 'var(--accent)';
   clearTimeout(fb._timer);
   fb._timer = setTimeout(() => fb.style.display = 'none', 6000);
 }
 
+// ===================== REINICIAR ANIMAÇÃO DAS BARRAS DE HABILIDADE =====================
 const observer = new MutationObserver(() => {
   const bars = document.querySelectorAll('.skill-bar-fill');
   bars.forEach(b => {
