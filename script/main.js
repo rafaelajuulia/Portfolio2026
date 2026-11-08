@@ -1,4 +1,3 @@
-// ===================== NAVEGAÇÃO ENTRE PÁGINAS (SPA) =====================
 const pages = document.querySelectorAll('.page');
 const navLinks = document.querySelectorAll('[data-page]');
 
@@ -26,7 +25,6 @@ navLinks.forEach(link => {
   });
 });
 
-// ===================== MENU MOBILE =====================
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navLinks');
 if (navToggle && navMenu) {
@@ -35,7 +33,6 @@ if (navToggle && navMenu) {
   });
 }
 
-// ===================== CONTATO (e-mail/telefone ofuscados) =====================
 (function renderContato() {
   const u = 'rafaelatech321';
   const d = 'gmail.com';
@@ -69,7 +66,6 @@ if (navToggle && navMenu) {
   if (phoneVal)  phoneVal.textContent = phone;
 })();
 
-// ===================== FORMULÁRIO DE CONTATO =====================
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgzprqp';
 
 async function enviarMensagem() {
@@ -135,7 +131,6 @@ function mostrarFeedback(texto, tipo) {
   fb._timer = setTimeout(() => fb.style.display = 'none', 6000);
 }
 
-// ===================== REINICIAR ANIMAÇÃO DAS BARRAS DE HABILIDADE =====================
 const observer = new MutationObserver(() => {
   const bars = document.querySelectorAll('.skill-bar-fill');
   bars.forEach(b => {
@@ -146,3 +141,45 @@ const observer = new MutationObserver(() => {
 });
 const habilPage = document.getElementById('habilidades');
 if (habilPage) observer.observe(habilPage, { attributeFilter: ['class'] });
+
+(function () {
+  const el = document.getElementById('typing-words');
+  if (!el) return;
+
+  const palavras = [
+    'Cibersegurança',
+    'Ethical Hacking',
+    'Inteligência Artificial',
+    'UX/UI Desing',
+    'Desenvolvimento Front-end'
+  ];
+
+  let p = 0;
+  let c = 0;
+  let apagando = false;
+
+  function digitar() {
+    const palavra = palavras[p];
+
+    if (!apagando) {
+      c++;
+      el.textContent = palavra.slice(0, c);
+      if (c === palavra.length) {
+        apagando = true;
+        return setTimeout(digitar, 1500);
+      }
+      return setTimeout(digitar, 80);
+    }
+
+    c--;
+    el.textContent = palavra.slice(0, c);
+    if (c === 0) {
+      apagando = false;
+      p = (p + 1) % palavras.length;
+      return setTimeout(digitar, 400);
+    }
+    setTimeout(digitar, 40);
+  }
+
+  digitar();
+})();
